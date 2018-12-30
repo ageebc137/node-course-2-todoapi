@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/TodoApp', {useNewUrlParser: true}).then(() => {
-  console.log('Connected to Database')
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true}).then(() => {
+  console.log('Connected to Database', process.env.MONGODB_URI)
 }).catch(err => {
   console.log("not connected to database!", err);
 });

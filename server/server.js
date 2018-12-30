@@ -1,3 +1,18 @@
+let env = process.env.NODE_ENV || 'development';
+console.log('env ****', env)
+
+if (env === 'development') {
+  process.env.PORT = 3000;
+  process.env.MONGODB_URI = 'mongodb://localhost:27017/TodoApp';
+}else if (env === 'test') {
+  process.env.PORT = 3000;
+  process.env.MONGODB_URI = 'mongodb://localhost:27017/TodoAppTest'
+}else{
+  process.env.MONGODB_URI = 'mongodb://rickmortc137:Airaledn90!@ds145304.mlab.com:45304/nodetodoapi'
+}
+
+console.log(process.env.MONGODB_URI);
+
 let express = require('express');
 let bodyParser = require('body-parser');
 let _ = require('lodash');
@@ -8,7 +23,7 @@ var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
 var app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
