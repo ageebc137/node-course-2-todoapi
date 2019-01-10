@@ -48,15 +48,12 @@ UserSchema.methods.generateAuthToken = function() {
   user.tokens = user.tokens.concat([{access, token}]);
 
   return user.save().then(() => {
-    console.log("2");
     return token;
   });
 };
 
 UserSchema.statics.findByToken = function(token) {
   var User = this;
-  var decoded;
-
   try {
     decoded = jwt.verify(token, 'abc123');
   } catch (e) {
@@ -64,9 +61,9 @@ UserSchema.statics.findByToken = function(token) {
   }
 
   return User.findOne({
-    _id: decoded._id,
-    'tokens.token': token,
-    'tokens.access': 'auth'
+    "_id": decoded._id,
+    "tokens.token": token,
+    "tokens.access": "auth"
   });
 };
 
